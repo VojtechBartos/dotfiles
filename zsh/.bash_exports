@@ -1,86 +1,47 @@
-# Auto-attach tmux for SSH sessions (Termius/Blink)
-if [ -f ${HOME}/.dotfiles/zsh/ssh-tmux.zsh ]; then
-  . ${HOME}/.dotfiles/zsh/ssh-tmux.zsh
-fi
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-ZSH_THEME="agnoster"
-prompt_context(){}
+# Path to your oh-my-zsh installation.
+export ZSH=~/.oh-my-zsh
 
-listening() {
-    if [ $# -eq 0 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P
-    elif [ $# -eq 1 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
-    else
-        echo "Usage: listening [pattern]"
-    fi
-}
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+)
 
-killpid() {
-  if [ $# -eq 1 ]; then
-    kill -9 $1
-  else
-    kill
-  fi
-}
+source $ZSH/oh-my-zsh.sh
 
-export SSH_AUTH_SOCK=/Users/haacked/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export OPENSSL_ROOT_DIR="/opt/homebrew/opt/openssl@3"
-export OPENSSL_LIB_DIR="/opt/homebrew/opt/openssl@3/lib"
-export OPENSSL_INCLUDE_DIR="/opt/homebrew/opt/openssl@3/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+# initialize pure prompt ohmyzsh https://github.com/sindresorhus/pure
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+autoload -U promptinit; promptinit
+prompt pure
 
+# User configuration
+export LANG=en_US.UTF-8
+export LC_ALL="en_US.UTF-8"
+export EDITOR="nvim"
+export TERM="xterm-256color"
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
-
-
-# Pyenv exports
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
-eval "$(nodenv init -)" 
-
-THEARCH=$(arch)
-if [[ x"$THEARCH" == x"i386" ]]; then
-	eval $(/usr/local/bin/brew shellenv)
-else
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-# NVM end
-
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
 
 # Dotfiles bin directory
 export PATH="$HOME/.dotfiles/bin:$PATH"
 
-# PostHog infra scripts (grafana-region, grafana-token, etc.)
-export PATH="$HOME/dev/posthog/posthog/infra-scripts/mcp:$PATH"
+# Node env
+eval "$(fnm env)"
 
-# Add .NET Core SDK tools
-export PATH="$PATH:/Users/haacked/.dotnet/tools"
-export PATH="$PATH:/Users/haacked/.dotfiles/dotnet/scripts"
-export PATH=$PATH:/usr/local/share/dotnet
-# dotnet end
+# Direnv
+eval "$(direnv hook zsh)"
 
-# Ruby - rbenv
-export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
-eval "$(rbenv init - zsh)"
-# rbenv end
-
-# pnpm
-export PNPM_HOME="/Users/haacked/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+# Fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # tree-me auto-cd support
 if command -v tree-me >/dev/null 2>&1; then

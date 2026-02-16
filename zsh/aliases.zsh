@@ -31,3 +31,6 @@ alias disk-cleanup-rust='~/.dotfiles/bin/disk-cleanup --module rust'
 alias disk-cleanup-rust-aggressive='~/.dotfiles/bin/disk-cleanup --module rust --aggressive'
 alias disk-cleanup-caches='~/.dotfiles/bin/disk-cleanup --module python'
 alias disk-monitor-log='tail -f ~/.dotfiles/.notes/disk-monitor.log'
+
+# SSH 
+alias ssh-keychain="ssh-add -K ~/.ssh/id_rsa"

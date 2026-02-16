@@ -19,11 +19,11 @@
         required = true
 
 [merge]
-    conflictStyle = "diff3"
+        conflictStyle = "diff3"
 
 [merge "mergiraf"]
-    name = mergiraf
-    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+        name = mergiraf
+        driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 
 [mergetool]
         keepBackup = false
@@ -49,17 +49,18 @@
 	autosquash = true
 	
 [core]
-	editor = code --wait
-	sshCommand = ssh -o IdentityAgent=/Users/haacked/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+	editor = nvim
+
 [init]
 	defaultBranch = main
 [user]
-	name = Phil Haack
-	email = haacked@gmail.com
-	branchprefix = haacked/
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+	name = Vojta Bartos
+	email = hi@vojtabartos.com
+	branchprefix = vojtab/
+
 [gpg "ssh"]
-	program = /usr/bin/ssh-keygen
-[alias]
-	sign-unpushed = "\\!f() { DEFAULT=$(git default); UPSTREAM=${1-origin/$DEFAULT}; git rebase --exec \"git commit --amend --no-edit -S\" $UPSTREAM; }; f"
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh

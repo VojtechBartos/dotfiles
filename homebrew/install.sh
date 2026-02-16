@@ -47,53 +47,58 @@ EOF
 }
 
 install 1password yes
-install cowsay
+install brave-browser yes
+install cursor yes
+install fnm
 install fortune
+install cowsay
+install ghostty yes
+install caffeine yes
+install claude-code yes
+install superhuman yes
+install orbstack yes
+install uv
+install lazygit
+install neovim
+install fork yes
+install flycut yes
+install alfred yes
+install rectangle yes
+install google-chrome yes
+install bartender yes
 install gh
-install git-filter-repo
 install go
+install lazygit
 install google-drive yes
-install iterm2 yes
-install jetbrains-toolbox yes
 install markdownlint-cli2
 install mergiraf
 install ngrok yes
-install nvm
-install OneDrive yes
 install openssl
 install postman yes
-install powershell yes
-install pulumi/tap/pulumi
 install readline
-install rbenv
-install ruby-install
 install secretive yes
 install slack yes
 install spotify yes
 install sqlite3
 install visual-studio-code yes
-install wezterm yes
 install xz
 install zlib
 install zsh
+install fzf
+install reattach-to-user-namespace
+install pure # pure prompt for ohmyzsh theme
+install grip # for markdown preview
+install cmake
+install tmux
+install wget
+install gnupg
+install gping
+install htop
+install istat-menus
+install whatsapp yes
+install the_silver_searcher  # vim ag search
 
-gh extension install seachicken/gh-poi
 
-# Install Rust
-if test ! $(which rustup)
-then
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-fi
-
-# You may need to run these commands for ruby-installer to work.
-# export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
-# export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
-# export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
-ruby-install ruby 3.1.3
-gem install jekyll --user-install
-
-curl https://pyenv.run | bash
 
 brew cleanup
 rm -f -r /Library/Caches/Homebrew/*
