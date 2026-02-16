@@ -40,3 +40,9 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Global WebKit developer extras (this one still works)
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Automatically hide and show the Dock.
+defaults write com.apple.dock autohide -bool true
+
+# Show battery percentage in the menu bar (macOS Monterey and later)
+defaults write com.apple.controlcenter "NSStatusItem Visible Battery" -bool true
