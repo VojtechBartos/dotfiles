@@ -28,8 +28,9 @@ eval "$(direnv hook zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # tree-me auto-cd support
+# tree-me auto-cd support
 if command -v tree-me >/dev/null 2>&1; then
-    source <(tree-me shellenv)
+    source <(tree-me shellenv 2>/dev/null)
 fi
 
 # Terminal greeting
