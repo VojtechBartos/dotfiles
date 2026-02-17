@@ -1,0 +1,123 @@
+" Leader
+let mapleader = ','
+
+" generic settings
+syntax on
+set nobackup
+set nowritebackup
+set noswapfile " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set noshowmode
+set history=500
+set showcmd " display incomplete commands
+set incsearch " do incremental searching
+set laststatus=2 " Always display the status line
+set autowrite " Automatically :write before running commands
+set nocursorline " cursorline makes iTerm slower
+set autoread
+set tabstop=4
+set shiftwidth=4 " http://vimdoc.sourceforge.net/htmldoc/options.html#'shiftwidth'
+set softtabstop=4
+set shiftround
+set expandtab
+set signcolumn=yes
+set wildmenu " visual autocomplete for command menu
+set lazyredraw " redraw only when we need to.
+set ttyfast " supposed to be for performance
+set showmatch " highlight matching [{()}]
+set incsearch " search as characters are entered
+set hlsearch " highlight matches
+set ignorecase
+set smartcase
+set number
+set encoding=utf-8
+set mouse=a " enable mouse for all modes
+set clipboard=unnamedplus
+set laststatus=2 " always display the statusline in all windows
+set list
+set listchars+=space:·
+
+" Use new regular expression engine - https://jameschambers.co.uk/vim-typescript-slow
+set re=0
+
+" Enable auto indent
+set autoindent
+set smartindent
+
+" indent line
+set textwidth=89
+set colorcolumn=+1
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+
+" Custom colors
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=None ctermbg=NONE
+hi NonText guibg=bg  guifg=#40545B ctermfg=8
+hi ColorColumn guibg=#1B2C3B
+hi GitGutterAdd    guifg=#009900 guibg=None ctermfg=2 ctermbg=None
+hi GitGutterChange guifg=#bbbb00 guibg=None ctermfg=3 ctermbg=None
+hi GitGutterDelete guifg=#ff2222 guibg=None ctermfg=1 ctermbg=None
+hi ALEErrorSign guibg=None ctermbg=None guifg=#ff0000 ctermfg=9
+hi ALEWarningSign guibg=None ctermbg=None guifg=#d7af00 ctermfg=178
+
+" Auto save
+let g:auto_save = 0  " enable AutoSave on Vim startup
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'relativepath', 'modified' ] ],
+      \   'right': [['lineinfo'],
+      \             ['percent'],
+      \             ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
+      \ },
+      \ 'inactive': {
+      \   'left': [['mode', 'paste'],
+      \            ['relativepath', 'modified']],
+      \   'right': []
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \ },
+      \ }
+
+
+"
+" Mappings
+"
+
+nnoremap <Leader>s :update<CR>
+nnoremap <Leader>q :quit<CR>
+nnoremap <Leader>Q :quit!<CR>
+
+" fuzzy file
+nnoremap <leader><space> :Files<CR>
+
+" ag search
+nnoremap \ :Ag<CR>
+
+
+" buffer and history
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>h :History<CR>
+
+" nerdtree
+nmap <Leader>f :NERDTreeToggle<CR>
+nmap <Leader>ff :NERDTreeFind<CR>
+
+" git
+nnoremap <silent> <leader>fs :Gstatus<CR>
+nnoremap <silent> <leader>fd :Gdiff<CR>
+nnoremap <silent> <leader>fc :Gcommit<CR>
+nnoremap <silent> <leader>fb :Gblame<CR>
+
+inoremap § <Esc>

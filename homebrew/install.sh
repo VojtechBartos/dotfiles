@@ -60,6 +60,9 @@ install orbstack yes
 install uv
 install lazygit
 install neovim
+install pyright  # Python LSP for Neovim
+install gopls    # Go LSP
+install typescript-language-server  # TypeScript/React LSP
 install fork yes
 install flycut yes
 install alfred yes
@@ -86,7 +89,6 @@ install zlib
 install zsh
 install fzf
 install reattach-to-user-namespace
-install pure # pure prompt for ohmyzsh theme
 install grip # for markdown preview
 install cmake
 install tmux
