@@ -1,5 +1,5 @@
 autoload -Uz compinit
-compinit
+compinit -u
 
 # Source bash exports
 if [ -f ${HOME}/.dotfiles/zsh/.bash_exports ]; then
@@ -12,3 +12,7 @@ for config_file (${HOME}/.dotfiles/zsh/*.zsh); do
 done
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# Zsh plugins (brew)
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

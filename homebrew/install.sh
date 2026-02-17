@@ -97,6 +97,11 @@ install htop
 install istat-menus
 install whatsapp yes
 install the_silver_searcher  # vim ag search
+install zsh-syntax-highlighting
+install zsh-autosuggestions
+install jq
+install httpie
+install starship
 
 
 
