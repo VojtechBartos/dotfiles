@@ -21,8 +21,12 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 # Show the ~/Library folder.
 chflags nohidden ~/Library
 
-# Set a really fast key repeat.
+# Set the fastest key repeat rate. 1 is the fastest allowed (default is 2, slowest is 120).
+# Set KeyRepeat to the fastest allowed value (1 = fastest, higher is slower)
 defaults write NSGlobalDomain KeyRepeat -int 1
+
+# Set InitialKeyRepeat to the shortest allowed delay (10 = fastest, higher is slower)
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Set the Finder prefs for showing a few different volumes on the Desktop.
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -46,3 +50,9 @@ defaults write com.apple.dock autohide -bool true
 
 # Show battery percentage in the menu bar (macOS Monterey and later)
 defaults write com.apple.controlcenter "NSStatusItem Visible Battery" -bool true
+
+# Disable keyboard auto-correct (spelling correction)
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable keyboard auto-punctuation
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
