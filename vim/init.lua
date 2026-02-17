@@ -89,9 +89,11 @@ vim.keymap.set("n", "<leader>r", "<cmd>Ag<cr>", { desc = "Full text search (silv
 -- Neo-tree: open/toggle file explorer
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neo-tree toggle" })
 
--- Splits
-vim.keymap.set("n", "<leader>v", "<cmd>vsplit<cr>", { desc = "Split vertically" })
-vim.keymap.set("n", "<leader>s", "<cmd>split<cr>", { desc = "Split horizontally" })
+-- Splits and save
+vim.keymap.set("n", "<leader>vv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
+vim.keymap.set("n", "<leader>vh", "<cmd>split<cr>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>h", "<cmd>History<cr>", { desc = "Command history (fzf)" })
+vim.keymap.set("n", "<leader>s", "<cmd>w<cr>", { desc = "Save" })
 
 -- Tabs
 vim.keymap.set("n", "<leader>c", "<cmd>tabnew<cr>", { desc = "New tab" })

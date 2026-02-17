@@ -37,3 +37,4 @@ alias ssh-keychain="ssh-add -K ~/.ssh/id_rsa"
 
 # Generics
 alias la='ls -laG'
+alias n='nvim'

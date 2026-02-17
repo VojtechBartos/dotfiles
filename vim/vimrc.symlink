@@ -108,8 +108,6 @@ nnoremap \ :Ag<CR>
 
 " buffer and history
 nmap <Leader>b :Buffers<CR>
-nmap <Leader>h :History<CR>
-
 " nerdtree
 nmap <Leader>f :NERDTreeToggle<CR>
 nmap <Leader>ff :NERDTreeFind<CR>

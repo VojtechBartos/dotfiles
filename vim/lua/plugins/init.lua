@@ -27,4 +27,16 @@ return {
   "hrsh7th/cmp-path",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
+  -- Dashboard (start screen)
+  {
+    "goolord/alpha-nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VimEnter",
+    opts = function()
+      return require("alpha.themes.dashboard").config
+    end,
+    config = function(_, opts)
+      require("alpha").setup(opts)
+    end,
+  },
 }
