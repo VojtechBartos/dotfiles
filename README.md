@@ -2,7 +2,7 @@
 
 Your dotfiles are how you personalize your system. These are mine.
 
-They're so personal I copied much of them from https://github.com/haacked/dotfiles/edit/master/README.md including the approach to install them.
+They're so personal I copied much of them from https://github.com/haacked/dotfiles/blob/main/README.md including the approach to install them.
 
 ## Install
 
