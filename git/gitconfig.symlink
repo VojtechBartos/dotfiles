@@ -53,14 +53,16 @@
 
 [init]
 	defaultBranch = main
+
 [user]
 	name = Vojta Bartos
 	email = hi@vojtabartos.com
 	branchprefix = vojtab/
+	signingkey = /Users/vojta/.ssh/id_ed25519_signing.pub
 
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [commit]
 	gpgsign = true
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /Users/vojta/.gitconfig.allowed_signers
