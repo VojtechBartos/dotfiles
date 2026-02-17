@@ -34,3 +34,6 @@ alias disk-monitor-log='tail -f ~/.dotfiles/.notes/disk-monitor.log'
 
 # SSH 
 alias ssh-keychain="ssh-add -K ~/.ssh/id_rsa"
+
+# Generics
+alias la='ls -laG'
