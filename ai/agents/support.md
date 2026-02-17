@@ -72,8 +72,8 @@ Example:
 
 ```bash
 ~/.claude/skills/support/scripts/support-find-ticket.sh zendesk 40875
-# Output: found	/Users/haacked/dev/ai/support/2025-12-22/zendesk-40875
-# Or:     new	/Users/haacked/dev/ai/support/2025-12-29/zendesk-40875
+# Output: found	/Users/vojta/dev/ai/support/2025-12-22/zendesk-40875
+# Or:     new	/Users/vojta/dev/ai/support/2025-12-29/zendesk-40875
 ```
 
 **Never construct paths manually.** The script handles:
