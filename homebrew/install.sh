@@ -69,7 +69,7 @@ install bartender yes
 install gh
 install go
 install lazygit
-install google-drive yes
+# install google-drive yes
 install markdownlint-cli2
 install mergiraf
 install ngrok yes
