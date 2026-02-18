@@ -47,64 +47,65 @@ EOF
 }
 
 install 1password yes
+install alfred yes
+install bartender yes
 install brave-browser yes
-install cursor yes
-install fnm
-install fortune
-install cowsay
-install ghostty yes
 install caffeine yes
 install claude-code yes
 install claude yes
-install superhuman yes
-install orbstack yes
-install uv
-install lazygit
-install neovim
-install pyright  # Python LSP for Neovim
-install gopls    # Go LSP
-install typescript-language-server  # TypeScript/React LSP
-install fork yes
+install cmake
+install cowsay
+install cursor yes
+install fzf
+install fnm
 install flycut yes
-install alfred yes
-install rectangle yes
-install google-chrome yes
-install bartender yes
+install fork yes
+install fortune
 install gh
+install ghostty yes
 install go
-install lazygit
+install gnupg
+install google-chrome yes
 # install google-drive yes
+install gopls    # Go LSP
+install gping
+install grip # for markdown preview
+install htop
+install httpie
+install istat-menus
+install jq
+install lazygit
+install lazygit
 install markdownlint-cli2
 install mergiraf
+install neovim
 install ngrok yes
 install openssl
+install orbstack yes
 install postman yes
+install pyright  # Python LSP for Neovim
 install readline
+install reattach-to-user-namespace
+install rectangle yes
 install secretive yes
 install slack yes
 install spotify yes
 install sqlite3
+install starship
+install superhuman yes
+install the_silver_searcher  # vim ag search
+install tmux
+install typescript-language-server  # TypeScript/React LSP
+install uv
 install visual-studio-code yes
+install whatsapp yes
+install wget
 install xz
 install zlib
 install zsh
-install fzf
-install reattach-to-user-namespace
-install grip # for markdown preview
-install cmake
-install tmux
-install wget
-install gnupg
-install gping
-install htop
-install istat-menus
-install whatsapp yes
-install the_silver_searcher  # vim ag search
-install zsh-syntax-highlighting
 install zsh-autosuggestions
-install jq
-install httpie
-install starship
+install zsh-syntax-highlighting
+
 
 
 
