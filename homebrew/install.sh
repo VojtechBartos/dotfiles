@@ -87,6 +87,8 @@ install pyright  # Python LSP for Neovim
 install readline
 install reattach-to-user-namespace
 install rectangle yes
+install rbenv
+install ruby-install
 install secretive yes
 install slack yes
 install spotify yes
@@ -106,8 +108,18 @@ install zsh
 install zsh-autosuggestions
 install zsh-syntax-highlighting
 
-
-
+# Ruby 3.1.3 via ruby-install (uses Homebrew openssl; openssl@1.1 is deprecated)
+# export PATH="/opt/homebrew/opt/openssl/bin:$PATH"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/openssl/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/openssl/include"
+RUBY_DIR="$HOME/.rubies/ruby-3.1.3"
+if [ ! -x "$RUBY_DIR/bin/ruby" ]; then
+  ruby-install ruby 3.1.3
+fi
+if [ -x "$RUBY_DIR/bin/gem" ]; then
+  "$RUBY_DIR/bin/gem" install kamal
+fi
 
 brew cleanup
 rm -f -r /Library/Caches/Homebrew/*
