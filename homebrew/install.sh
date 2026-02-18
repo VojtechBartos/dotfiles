@@ -55,6 +55,7 @@ install cowsay
 install ghostty yes
 install caffeine yes
 install claude-code yes
+install claude yes
 install superhuman yes
 install orbstack yes
 install uv
