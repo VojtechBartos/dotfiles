@@ -86,7 +86,15 @@ vim.g.fzf_layout = { down = "40%" }
 vim.keymap.set("n", "<leader>t", "<cmd>Files<cr>", { desc = "Fuzzy find files" })
 vim.keymap.set("n", "<leader>r", "<cmd>Ag<cr>", { desc = "Full text search (silver searcher)" })
 
--- Neo-tree: open/toggle file explorer
+-- Neo-tree: open/toggle file explorer; show hidden files and directories
+require("neo-tree").setup({
+  filesystem = {
+    filtered_items = {
+      hide_dotfiles = false,
+      hide_gitignored = false,
+    },
+  },
+})
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neo-tree toggle" })
 
 -- Splits and save
