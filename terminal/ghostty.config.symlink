@@ -1,0 +1,16 @@
+# Ghostty terminal config (fixes weird colors by using a consistent theme)
+# Symlinked to ~/Library/Application Support/com.mitchellh.ghostty/config on macOS
+
+# Use a built-in theme for consistent 256/true color palette
+# Run `ghostty +list-themes` to pick another
+theme = "Atom One Dark"
+
+# Optional: explicit cursor so it's visible
+cursor-style = "bar"
+cursor-style-blink = true
+
+# Optional: ensure minimum contrast so text is readable
+minimum-contrast = 1.1
+
+# Window: no rounded corners (may have no effect in current Ghostty; not officially supported)
+window-corner-radius = 0

@@ -1,0 +1,2 @@
+# Prevent timeout when Node/fnm or other tools are slow (e.g. first run, Docker context)
+command_timeout = 5000
