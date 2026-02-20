@@ -263,10 +263,10 @@ fi
 # Define MCP servers as a list of entries
 # Format: "name|description|command"
 MCP_SERVERS="
-posthog-db|PostHog database connection|/Users/haacked/.local/bin/postgres-mcp --access-mode=restricted
+posthog-db|PostHog database connection|/Users/vojta/.local/bin/postgres-mcp --access-mode=restricted
 memory|Persistent memory across sessions|npx -y @modelcontextprotocol/server-memory
 git|Structured git operations|npx -y @modelcontextprotocol/server-git
-grafana|Grafana MCP server|/Users/haacked/.dotfiles/bin/mcp-grafana-wrapper.sh
+grafana|Grafana MCP server|/Users/vojta/.dotfiles/bin/mcp-grafana-wrapper.sh
 "
 
 # Special environment variables for specific servers

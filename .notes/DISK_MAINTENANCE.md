@@ -9,21 +9,6 @@ Your system now has automated disk space monitoring that:
 - **Critical alert at 90% full** with a "Basso" notification sound
 - **Logs all activity** to `~/.dotfiles/.notes/disk-monitor.log`
 
-### Service Management
-
-```bash
-# Check if monitoring service is running
-launchctl list | grep disk-monitor
-
-# Stop monitoring service
-launchctl unload ~/Library/LaunchAgents/com.haacked.disk-monitor.plist
-
-# Start monitoring service
-launchctl load ~/Library/LaunchAgents/com.haacked.disk-monitor.plist
-
-# View monitoring logs
-disk-monitor-log
-```
 
 ## Quick Cleanup Commands
 
@@ -84,18 +69,13 @@ xcrun simctl list devices               # List all simulators
 
 ### Customizing Thresholds
 
-Edit `/Users/haacked/.dotfiles/bin/check-disk-space`:
+Edit `/Users/vojta/.dotfiles/bin/check-disk-space`:
 
 ```bash
 WARNING_THRESHOLD=85   # Change to desired warning percentage
 CRITICAL_THRESHOLD=90  # Change to desired critical percentage
 ```
 
-After editing, reload the service:
-```bash
-launchctl unload ~/Library/LaunchAgents/com.haacked.disk-monitor.plist
-launchctl load ~/Library/LaunchAgents/com.haacked.disk-monitor.plist
-```
 
 ## Emergency Cleanup
 

@@ -242,7 +242,7 @@ When working on the https://github.com/PostHog/posthog repository, use the follo
 When working on other repositories, use the following workflow:
 
 - When taking on a new task, prompt to create a new branch and associated worktree.
-  - Default: branch off the main branch (e.g. `main` or `master` depending on the repo), named `haacked/<slug>` or `haacked/<issue#>-<slug>` if the issue number is known.
+  - Default: branch off the main branch (e.g. `main` or `master` depending on the repo), named `vojtab/<slug>` or `vojtab/<issue#>-<slug>` if the issue number is known.
   - Place the worktree in `~/dev/worktrees/<repo-name>/<branch-name>`.
     - Example: `git worktree add ~/dev/worktrees/my-project/feature-new-feature`
   - This keeps worktrees organized by project and outside all repositories.
@@ -333,7 +333,7 @@ PostHog has a lot of client SDKs. Sometimes it's useful to distinguish between t
 
 ## Git
 
-- Name branches `haacked/<slug>` where slug is a short description of the task.
+- Name branches `vojtab/<slug>` where slug is a short description of the task.
 - Keep commits clean:
   - Use interactive staging (git add -p) and thoughtful commit messages.
   - Squash when appropriate. Avoid "WIP" commits unless you're spiking.

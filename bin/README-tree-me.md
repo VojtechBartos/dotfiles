@@ -146,13 +146,13 @@ This tool is just a thin wrapper. Git does the real work:
 
 ```bash
 # Create a new feature branch
-tree-me create haacked/new-feature
+tree-me create vojtab/new-feature
 
 # Switch to existing branch
 tree-me sw main
 
 # Branch from develop instead of main
-tree-me create haacked/fix-bug develop
+tree-me create vojtab/fix-bug develop
 
 # Checkout a PR
 tree-me pr 123
@@ -161,7 +161,7 @@ tree-me pr 123
 tree-me ls
 
 # Remove a worktree (use tab to see available branches)
-tree-me rm haacked/old-feature
+tree-me rm vojtab/old-feature
 
 # Clean up stale worktrees
 tree-me prune

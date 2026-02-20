@@ -120,7 +120,7 @@ PERMISSIONS_CONFIG=$(cat <<'EOF'
       "Bash(cargo :*)",
       "Bash(* > /tmp/*)",
       "Read(/tmp/**)",
-      "Read(//Users/haacked/dev/**)"
+      "Read(//Users/vojta/Code/**)"
     ]
   }
 }
@@ -136,7 +136,7 @@ if command -v jq > /dev/null 2>&1 && \
    jq -e '.permissions.allow[] | select(. == "Bash(ruff:*)")' "$SETTINGS_FILE" > /dev/null 2>&1 && \
    jq -e '.permissions.allow[] | select(. == "Fetch(*)")' "$SETTINGS_FILE" > /dev/null 2>&1 && \
    jq -e '.permissions.allow[] | select(. == "Read(/tmp/**)")' "$SETTINGS_FILE" > /dev/null 2>&1 && \
-   jq -e '.permissions.allow[] | select(. == "Read(//Users/haacked/dev/**)")' "$SETTINGS_FILE" > /dev/null 2>&1; then
+   jq -e '.permissions.allow[] | select(. == "Read(//Users/vojta/Code/**)")' "$SETTINGS_FILE" > /dev/null 2>&1; then
     success "Tool permissions already configured"
 else
     # Merge permissions configuration using helper function
