@@ -56,6 +56,7 @@ install claude yes
 install cmake
 install cowsay
 install cursor yes
+install dropbox yes
 install fzf
 install fnm
 install flycut yes
