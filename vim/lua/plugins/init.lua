@@ -18,7 +18,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
-      require("nvim-treesitter").install({ "python", "go", "typescript", "javascript", "tsx", "jsx", "lua", "bash", "markdown", "json", "yaml", "sql", "dockerfile", "make", "ini", "toml", "css" }):wait()
+      require("nvim-treesitter").install({ "python", "go", "typescript", "javascript", "tsx", "jsx", "lua", "bash", "markdown", "json", "yaml", "sql", "dockerfile", "make", "ini", "toml", "css", "rust" }):wait()
     end,
   },
   "907th/vim-auto-save",
