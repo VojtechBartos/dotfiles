@@ -99,6 +99,7 @@ install superhuman yes
 install the_silver_searcher  # vim ag search
 install tmux
 install typescript-language-server  # TypeScript/React LSP
+install tree-sitter
 install uv
 install visual-studio-code yes
 install whatsapp yes

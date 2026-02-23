@@ -1,5 +1,11 @@
 return {
   { "joshdick/onedark.vim", lazy = false, priority = 1000 },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = function()
+      require("nvim-treesitter").install({ "python", "go", "typescript", "javascript", "tsx", "jsx", "lua", "bash", "markdown", "json", "yaml", "sql", "dockerfile", "make", "ini", "toml", "css" }):wait()
+    end,
+  },
   "907th/vim-auto-save",
   "itchyny/lightline.vim",
   "airblade/vim-gitgutter",

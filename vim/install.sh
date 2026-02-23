@@ -10,6 +10,15 @@ ln -sf "$DOTFILES_ROOT/vim/lua/plugins" "$NVIM_DIR/lua/plugins"
 # Avoid conflicting configs: Neovim loads both init.lua and init.vim if both exist
 rm -f "$NVIM_DIR/init.vim"
 
+# Symlink bat config (syntax highlighting for fzf previews)
+mkdir -p "$HOME/.config/bat"
+ln -sf "$DOTFILES_ROOT/vim/bat-config" "$HOME/.config/bat/config"
+
+# Install tree-sitter CLI (required for nvim-treesitter parser compilation)
+if command -v npm >/dev/null 2>&1; then
+  npm install -g tree-sitter-cli
+fi
+
 # Install plugins (lazy.nvim will sync on first nvim run, or run :Lazy sync)
 if command -v nvim >/dev/null 2>&1; then
   nvim --headless "+Lazy! sync" +qa 2>/dev/null || true

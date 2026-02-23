@@ -2,7 +2,7 @@
 let mapleader = ','
 
 " generic settings
-syntax on
+syntax off
 set nobackup
 set nowritebackup
 set noswapfile " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
@@ -36,9 +36,6 @@ set laststatus=2 " always display the statusline in all windows
 set list
 set listchars+=space:·
 
-" Use new regular expression engine - https://jameschambers.co.uk/vim-typescript-slow
-set re=0
-
 " Enable auto indent
 set autoindent
 set smartindent
@@ -57,15 +54,12 @@ set signcolumn=yes
 
 
 " Custom colors
-hi Normal guibg=NONE ctermbg=NONE
-hi LineNr guibg=None ctermbg=NONE
 hi NonText guibg=bg  guifg=#40545B ctermfg=8
 hi ColorColumn guibg=#1B2C3B
 hi GitGutterAdd    guifg=#009900 guibg=None ctermfg=2 ctermbg=None
 hi GitGutterChange guifg=#bbbb00 guibg=None ctermfg=3 ctermbg=None
 hi GitGutterDelete guifg=#ff2222 guibg=None ctermfg=1 ctermbg=None
-hi ALEErrorSign guibg=None ctermbg=None guifg=#ff0000 ctermfg=9
-hi ALEWarningSign guibg=None ctermbg=None guifg=#d7af00 ctermfg=178
+
 
 " Auto save
 let g:auto_save = 0  " enable AutoSave on Vim startup
@@ -108,14 +102,7 @@ nnoremap \ :Ag<CR>
 
 " buffer and history
 nmap <Leader>b :Buffers<CR>
-" nerdtree
-nmap <Leader>f :NERDTreeToggle<CR>
-nmap <Leader>ff :NERDTreeFind<CR>
-
 " git
-nnoremap <silent> <leader>fs :Gstatus<CR>
 nnoremap <silent> <leader>fd :Gdiff<CR>
-nnoremap <silent> <leader>fc :Gcommit<CR>
-nnoremap <silent> <leader>fb :Gblame<CR>
 
 inoremap § <Esc>

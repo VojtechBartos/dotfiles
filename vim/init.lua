@@ -1,3 +1,5 @@
+vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/bin"
+
 -- Source shared vimrc (options, keymaps)
 local vimrc = vim.fn.expand("~/.vimrc")
 if vim.fn.filereadable(vimrc) == 1 then
@@ -30,7 +32,7 @@ local lsp_capabilities = cmp_lsp.default_capabilities()
 
 -- Python
 vim.lsp.config("pyright", {
-  cmd = { "pyright", "--stdio" },
+  cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = { ".git", "pyrightconfig.json", "pyproject.toml" },
   capabilities = lsp_capabilities,
@@ -79,8 +81,16 @@ cmp.setup({
   },
 })
 
+-- Use treesitter highlighting when a parser is available, fallback to syntax
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
 -- fzf: always bottom split, full width
 vim.g.fzf_layout = { down = "40%" }
+vim.env.FZF_DEFAULT_OPTS = (vim.env.FZF_DEFAULT_OPTS or "") .. " --preview 'bat --color=always --style=plain {}' --preview-window=right:50%"
 
 -- fzf: fuzzy file finder and full-text search (leader = , from vimrc)
 vim.keymap.set("n", "<leader>t", "<cmd>Files<cr>", { desc = "Fuzzy find files" })
