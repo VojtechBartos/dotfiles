@@ -96,6 +96,7 @@ require("neo-tree").setup({
   },
 })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neo-tree toggle" })
+vim.keymap.set("n", "<leader>ef", ":Neotree reveal<CR>", { silent = true })
 
 -- Splits and save
 vim.keymap.set("n", "<leader>vv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
