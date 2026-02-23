@@ -14,3 +14,6 @@ minimum-contrast = 1.1
 
 # Window: no rounded corners (may have no effect in current Ghostty; not officially supported)
 window-corner-radius = 0
+
+# Inactive splitted window opacity
+unfocused-split-opacity = 0.85
