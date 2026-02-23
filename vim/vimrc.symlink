@@ -104,5 +104,6 @@ nnoremap \ :Ag<CR>
 nmap <Leader>b :Buffers<CR>
 " git
 nnoremap <silent> <leader>fd :Gdiff<CR>
+nnoremap <silent> <leader>fb :Git blame<CR>
 
 inoremap § <Esc>
