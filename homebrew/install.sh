@@ -109,6 +109,10 @@ install zsh
 install zsh-autosuggestions
 install zsh-syntax-highlighting
 
+
+# Bontree (check out if hombrew is in place to replace installs
+go install github.com/almonk/bontree@latest
+
 # Ruby 3.1.3 via ruby-install (uses Homebrew openssl; openssl@1.1 is deprecated)
 # export PATH="/opt/homebrew/opt/openssl/bin:$PATH"
 # export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH"

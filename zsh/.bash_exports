@@ -21,6 +21,9 @@ eval "$(starship init zsh)"
 # Node env
 eval "$(fnm env)"
 
+# Go env
+export PATH="$HOME/go/bin:$PATH"
+
 # Direnv
 eval "$(direnv hook zsh)"
 
