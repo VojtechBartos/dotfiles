@@ -36,6 +36,27 @@ vim.lsp.config("pyright", {
   filetypes = { "python" },
   root_markers = { ".git", "pyrightconfig.json", "pyproject.toml" },
   capabilities = lsp_capabilities,
+  settings = {
+    python = {
+      analysis = {
+        diagnosticMode = "openFilesOnly",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
+  on_attach = function(client, bufnr)
+    local bufpath = vim.api.nvim_buf_get_name(bufnr)
+    local dir = vim.fs.dirname(bufpath)
+    local venv_dir = vim.fs.find(".venv", { path = dir, upward = true, type = "directory" })[1]
+    if venv_dir then
+      local python = venv_dir .. "/bin/python"
+      if vim.uv.fs_stat(python) then
+        client.config.settings.python.pythonPath = python
+        client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+      end
+    end
+  end,
 })
 vim.lsp.enable("pyright")
 
@@ -111,6 +132,11 @@ require("neo-tree").setup({
 })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neo-tree toggle" })
 vim.keymap.set("n", "<leader>ef", ":Neotree reveal<CR>", { silent = true })
+
+-- Diagnostics
+vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float({ scope = "line" }) end, { desc = "Show diagnostics" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
 
 -- Splits and save
 vim.keymap.set("n", "<leader>vv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
