@@ -64,6 +64,7 @@ install fork yes
 install fortune
 install gh
 install ghostty yes
+install git-lfs
 install go
 install gnupg
 install google-chrome yes
@@ -110,6 +111,8 @@ install zsh
 install zsh-autosuggestions
 install zsh-syntax-highlighting
 
+# Git large files
+git lfs install
 
 # Bontree (check out if hombrew is in place to replace installs
 go install github.com/almonk/bontree@latest
