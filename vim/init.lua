@@ -117,20 +117,18 @@ vim.keymap.set("n", "<leader>s", "<cmd>w<cr>", { desc = "Save" })
 -- Tabs
 vim.keymap.set("n", "<leader>c", "<cmd>tabnew<cr>", { desc = "New tab" })
 
--- Atom One Dark + transparent background (Ghostty)
-vim.cmd("colorscheme onedark")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
-vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
--- Space character (listchars space:·): color close to One Dark background (#282c34)
-vim.api.nvim_set_hl(0, "Whitespace", { fg = "#323842", blend = 100 })
--- Indent guide lines: very close to One Dark bg (#282c34)
-local indent_hl = { fg = "#292d35", blend = 100 }
-vim.api.nvim_set_hl(0, "IndentBlanklineChar", indent_hl)
-vim.api.nvim_set_hl(0, "IBLChar", indent_hl)
-vim.api.nvim_set_hl(0, "IblScope", indent_hl)
+vim.opt.fillchars = { vert = "│", vertleft = "│", vertright = "│" }
+
+local function set_indent_highlights()
+  vim.api.nvim_set_hl(0, "IBLChar",      { fg = "#3b414d" })
+  vim.api.nvim_set_hl(0, "IblScope",     { fg = "#5a6070" })
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#7a8499", bg = "none" })
+  vim.api.nvim_set_hl(0, "VertSplit",    { fg = "#7a8499", bg = "none" })
+end
+set_indent_highlights()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_indent_highlights })
+
 require("ibl").setup({
-  indent = { char = "▏" },  -- thinnest option (left one eighth block)
+  indent = { char = "▏", highlight = "IBLChar" },
+  scope  = { enabled = true, highlight = "IblScope" },
 })

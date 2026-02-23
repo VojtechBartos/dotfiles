@@ -1,5 +1,20 @@
 return {
-  { "joshdick/onedark.vim", lazy = false, priority = 1000 },
+  {
+    "navarasu/onedark.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("onedark").setup({
+        style = "warmer",
+        transparent = true,
+        highlights = {
+          ["Whitespace"]   = { fg = "#5a6275" },
+          ["@whitespace"]  = { fg = "#5a6275" },
+        },
+      })
+      require("onedark").load()
+    end,
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
