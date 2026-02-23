@@ -33,7 +33,7 @@ alias disk-cleanup-caches='~/.dotfiles/bin/disk-cleanup --module python'
 alias disk-monitor-log='tail -f ~/.dotfiles/.notes/disk-monitor.log'
 
 # SSH 
-alias ssh-keychain="ssh-add -K ~/.ssh/id_ed25519"
+alias ssh-keychain="ssh-add -K ~/.ssh/id_ed25519 && ssh-add -K ~/.ssh/id_ed25519_signing"
 
 # Generics
 alias la='ls -laG'
