@@ -39,7 +39,7 @@ vim.lsp.config("pyright", {
   settings = {
     python = {
       analysis = {
-        diagnosticMode = "openFilesOnly",
+        diagnosticMode = "workspace",
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
       },
@@ -135,6 +135,7 @@ vim.keymap.set("n", "<leader>ef", ":Neotree reveal<CR>", { silent = true })
 
 -- Diagnostics
 vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float({ scope = "line" }) end, { desc = "Show diagnostics" })
+vim.keymap.set("n", "<leader>dd", function() vim.diagnostic.setloclist() vim.cmd("lopen") end, { desc = "Show all diagnostics in file" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
 
