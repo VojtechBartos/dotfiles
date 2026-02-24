@@ -1,19 +1,43 @@
 # Ghostty terminal config (fixes weird colors by using a consistent theme)
 # Symlinked to ~/Library/Application Support/com.mitchellh.ghostty/config on macOS
 
-# Use a built-in theme for consistent 256/true color palette
-# Run `ghostty +list-themes` to pick another
-theme = "Atom One Dark"
+#theme = Oceanic Next
+theme = Atom One Dark
+macos-titlebar-style = tabs
+unfocused-split-opacity = 0.6
 
 # Optional: explicit cursor so it's visible
 cursor-style = "bar"
 cursor-style-blink = true
 
-# Optional: ensure minimum contrast so text is readable
-minimum-contrast = 1.1
+copy-on-select = clipboard
+focus-follows-mouse = true
+font-thicken = true
 
-# Window: no rounded corners (may have no effect in current Ghostty; not officially supported)
-window-corner-radius = 0
+macos-non-native-fullscreen = true
+mouse-hide-while-typing = true
 
-# Inactive splitted window opacity
-unfocused-split-opacity = 0.85
+# scrollback-limit in bytes, roughly 125,000 lines
+scrollback-limit = 100000000
+
+
+background-opacity = 0.95
+background-blur=16
+
+font-thicken-strength=1
+adjust-cell-height=1
+
+quit-after-last-window-closed = true
+window-new-tab-position = end
+window-save-state = never
+
+
+#font-feature = -calt
+font-feature = -liga
+#font-feature = -dlig
+font-size=13
+
+
+
+
+
