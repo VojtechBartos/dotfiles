@@ -102,6 +102,15 @@ cmp.setup({
   },
 })
 
+-- Auto-reload files changed outside nvim
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  callback = function()
+    if vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
 -- Use treesitter highlighting when a parser is available, fallback to syntax
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
