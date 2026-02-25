@@ -55,6 +55,7 @@ install caffeine yes
 install claude-code yes
 install claude yes
 install cmake
+install codex yes
 install cowsay
 install cursor yes
 install dropbox yes
