@@ -47,6 +47,7 @@ EOF
 }
 
 install 1password yes
+install 1password-cli
 install alfred yes
 install bartender yes
 install brave-browser yes
@@ -59,6 +60,7 @@ install cursor yes
 install dropbox yes
 install fzf
 install fnm
+install flox
 install flycut yes
 install fork yes
 install fortune
