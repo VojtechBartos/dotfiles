@@ -49,6 +49,15 @@ bind j select-pane -D
 # shorten command delay
 set -sg escape-time 0
 
+# Pass focus events to applications (needed for nvim, lazygit mouse support)
+set -g focus-events on
+
+# Pass through mouse clicks to apps on first click (don't just focus the pane)
+set -g mouse on
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
+set -g @scroll-without-changing-pane on
+set -g @emulate-scroll-for-no-mouse-alternate-buffer on
+
 #
 # Copy and paste
 #
@@ -86,11 +95,8 @@ set-window-option -qg window-status-bell-style "fg=colour1"
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'jaclu/tmux-menus
+set -g @plugin 'jaclu/tmux-menus'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-
-
-
 
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
