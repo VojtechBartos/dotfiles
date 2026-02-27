@@ -1,232 +1,135 @@
 # Development Guidelines
 
-## Philosophy
+## Core Principles
 
-### Core Beliefs
+- Incremental progress over big bangs: small, verifiable changes.
+- Pragmatic over dogmatic: adapt to the repository's reality.
+- Clear intent over cleverness: boring, readable code wins.
+- Minimize diff: touch only what is necessary.
+- No laziness: find root causes, avoid temporary patches.
+- If a type already supports an operation, use it instead of reimplementing.
 
-- **Incremental progress over big bangs** - Small changes that compile and pass tests
-- **Learning from existing code** - Study and plan before implementing
-- **Pragmatic over dogmatic** - Adapt to project reality
-- **Clear intent over clever code** - Be boring and obvious
+## Plan Mode Defaults
 
-### Simplicity Means
+- For any non-trivial task (3+ steps, ambiguity, or architecture choices), start in plan mode.
+- Write a concrete plan with checkable steps in `tasks/todo.md` before implementation.
+- If execution goes sideways, stop and re-plan immediately instead of pushing forward.
+- Use planning for verification work too, not only for implementation.
+- Check in with a high-level summary before major implementation transitions.
 
-- Single responsibility per function/class
-- Avoid premature abstractions
-- No clever tricks - choose the boring solution
-- If you need to explain it, it's too complex
-- If the type already supports an operation (via derives, traits, or methods), use it - don't reimplement
+## Execution Workflow
 
-## Backwards compatibility
+1. Understand existing patterns and constraints.
+2. Verify assumptions with code/tests, not memory.
+3. Write failing tests first when feasible.
+4. Implement the smallest change that satisfies requirements.
+5. Refactor while tests remain green.
+6. Track progress by marking completed items in `tasks/todo.md`.
+7. Summarize what changed and why.
 
-- If code was added in the current branch, it's not legacy code. Only code in the main (or master) branch is legacy code.
-- If you need to change a method that's not legacy, you can change it instead of adding a new method and trying to maintain backwards compatibility.
+## Verification Before Done
 
-## Agent Orchestration Framework
+- Never mark work complete without proof it works.
+- Validate behavior before/after when relevant.
+- Run applicable tests and linters; investigate failures.
+- Review logs/output for regressions.
+- Ask: "Would a staff engineer approve this diff?"
 
-### When to Use Which Agent
+## Autonomous Bug Fixing
 
-- **Complex Features (>3 stages or unclear requirements)**: Start with `implementation-planner`
-- **Test-First Development**: Use `unit-test-writer` before implementation
-- **Debugging Issues**: Use `bug-root-cause-analyzer` after 2 failed attempts
-- **Code Quality Checks**: Use `code-reviewer` before commits
-- **Complex Discoveries**: Use `note-taker` for non-obvious insights gained through exploration
-- **AI Prompt Issues**: Use `prompt-optimizer` for agent improvements
-- **Task Planning**: Use `task-orchestrator` to determine optimal agent workflow
+- When given a bug report, take ownership end-to-end.
+- Reproduce, isolate root cause, patch, and verify.
+- Add regression tests whenever possible.
+- Return with a concise diff summary and verification evidence.
+- Avoid unnecessary context-switching requests to the user.
 
-### Workflow Integration Patterns
+## Elegance (Balanced)
 
-#### Pattern 1: New Feature Development
+- For non-trivial changes, explicitly check if there is a simpler, more elegant design.
+- If current approach feels hacky, redesign using what is now known.
+- For simple fixes, avoid over-engineering.
 
-1. **Task Assessment** → `task-orchestrator` determines if `implementation-planner` needed
-2. **Planning** → `implementation-planner` creates staged plan (if complex)
-3. **Test Design** → `unit-test-writer` writes tests for current stage
-4. **Implementation** → Write minimal code to pass tests
-5. **Quality Check** → `code-reviewer` reviews before commit
-6. **Documentation** → `note-taker` documents complex discoveries
-7. Repeat steps 3-6 for each stage
+## Agent Orchestration
 
-#### Pattern 2: Bug Investigation
+- Use specialized agents liberally for focused work and cleaner main context.
+- Parallelize research/exploration/analysis when tasks are independent.
+- For complex features, use `implementation-planner`.
+- For test-first work, use `unit-test-writer`.
+- After 2 failed attempts, use `bug-root-cause-analyzer`.
+- Before commit, run `code-reviewer`.
+- Capture non-obvious insights with `note-taker`.
 
-1. **Initial Debugging** → Try fixing yourself (max 2 attempts)
-2. **Systematic Analysis** → `bug-root-cause-analyzer` investigates
-3. **Fix Implementation** → Implement the identified solution
-4. **Regression Prevention** → `unit-test-writer` adds tests to prevent recurrence
-5. **Quality Check** → `code-reviewer` reviews fix and tests
-6. **Knowledge Capture** → `note-taker` documents root cause if complex
+## Backwards Compatibility
 
-#### Pattern 3: Code Quality Improvement
-
-1. **Review** → `code-reviewer` identifies improvement opportunities
-2. **Test Safety Net** → `unit-test-writer` ensures comprehensive test coverage
-3. **Refactor** → Make improvements with tests passing
-4. **Final Review** → `code-reviewer` validates improvements
-
-## Process
-
-### 1. Planning & Staging
-
-When approaching a new repository, first read the README.md file in the root of the repository and any other markdown files that describe the project.
-
-For complex tasks, the `implementation-planner` agent creates durable, structured plans following the template and process defined in the `implementation-planner` agent documentation.
-
-### 2. Implementation Flow
-
-1. **Understand** - Study existing patterns in codebase
-2. **Test** - Use the `unit-test-writer` agent to write tests first (red)
-3. **Implement** - Minimal code to pass (green)
-4. **Refactor** - Clean up with tests passing
-5. **Commit** - With clear message linking to plan
-
-### 3. When Stuck (After 2 Attempts)
-
-**CRITICAL**: When implementation goes sideways, immediately switch to plan mode and re-plan. Don't keep pushing forward with a broken approach.
-
-**CRITICAL**: Maximum 2 attempts per issue, then use `bug-root-cause-analyzer` agent.
-
-The agent will systematically:
-
-1. **Document what failed** - What you tried, error messages, suspected causes
-2. **Research alternatives** - Find similar implementations and approaches
-3. **Question fundamentals** - Evaluate abstraction level and problem breakdown
-4. **Systematic investigation** - Use proven debugging methodologies
+- Code added on the current branch is not legacy.
+- Prefer changing non-legacy methods directly over compatibility wrappers.
 
 ## Technical Standards
 
-### Architecture Principles
+### Architecture
 
-- **Composition over inheritance** - Use dependency injection
-- **Interfaces over singletons** - Enable testing and flexibility
-- **Explicit over implicit** - Clear data flow and dependencies
-- **Test-driven when possible** - Never disable tests, fix them
+- Composition over inheritance.
+- Interfaces over singletons.
+- Explicit over implicit data flow.
+- Never disable tests to "make progress."
 
 ### Code Quality
 
-- **Every commit must**:
-  - Compile successfully
-  - Pass all existing tests
-  - Include tests for new functionality
-  - Follow project formatting/linting
-
-- **Before committing**:
-  - Run formatters/linters
-    - In a Rust codebase, run `cargo fmt`, `cargo clippy --all-targets --all-features -- -D warnings`, and `cargo shear` to check for issues.
-    - If bin/fmt exists, run it.
-    - Otherwise, run the formatter for the language.
-  - Use `code-reviewer` agent for quality check
-  - Ensure commit message explains "why"
+- Every commit must compile, pass tests, and follow project lint/format rules.
+- If `bin/fmt` exists, run it; otherwise use the language-standard formatter.
+- Commit messages must explain why, not only what.
 
 ### Error Handling
 
-- Fail fast with descriptive messages
-- Include context for debugging
-- Handle errors at appropriate level
-- Never silently swallow exceptions
-
-## Decision Framework
-
-For implementation decisions, refer to the decision framework in the `implementation-planner` agent documentation. Key factors include testability, maintainability, consistency, simplicity, and reversibility.
-
-## Documentation Framework
-
-### Project Planning
-
-- **Location**: `~/dev/ai/plans/{org}/{repo}/{issue-or-pr-or-branch-name-or-plan-slug}.md`
-- **Purpose**: Durable implementation plans for complex features
-- **Owner**: `implementation-planner` agent
-- **Lifecycle**: Permanent reference for architecture decisions and implementation history
-
-### Knowledge Capture
-
-- **Location**: `~/dev/ai/notes/`
-- **Purpose**: Permanent knowledge about complex discoveries
-- **Owner**: `note-taker` agent
-- **Trigger**: Non-obvious behaviors, complex debugging insights
-
-### Code Documentation
-
-- **Location**: In-code comments and README updates
-- **Purpose**: Explain WHY decisions were made
-- **Owner**: Developer (guided by `code-reviewer`)
+- Fail fast with descriptive messages.
+- Include actionable context.
+- Handle errors at the right layer.
+- Never silently swallow exceptions.
 
 ## Project Integration
 
-### Learning the Codebase
-
-- Find 3 similar features/components
-- Identify common patterns and conventions
-- Use same libraries/utilities when possible
-- Follow existing test patterns
-
-### Tooling
-
-- Use project's existing build system
-- Use project's test framework
-- Use project's formatter/linter settings
-- Don't introduce new tools without strong justification
+- Read root `README.md` and project markdown docs first.
+- Find at least 3 similar implementations before changing patterns.
+- Reuse existing libraries, helpers, test patterns, and tooling.
+- Do not introduce new tooling without strong justification.
 
 ## Quality Gates
 
 ### Definition of Done
 
-- [ ] Tests written and passing and are not redundant or unnecessary
-- [ ] Code is not dead or redundant and minimal to get the job done
-- [ ] Code follows project conventions
-- [ ] No linter/formatter warnings
-- [ ] **All dependencies are used (no cargo-shear warnings in Rust)**
-- [ ] **All Cargo features enable real functionality (Rust)**
-- [ ] **No tool warnings ignored without strong justification**
-- [ ] Commit messages are clear
-- [ ] Implementation matches plan
-- [ ] No TODOs without issue numbers
+- [ ] Tests added/updated and passing.
+- [ ] Diff is minimal and free of dead/redundant code.
+- [ ] Project conventions are followed.
+- [ ] No linter/formatter warnings.
+- [ ] No ignored warnings without explicit, strong reason.
+- [ ] Implementation matches the tracked plan.
+- [ ] No TODOs without linked issue.
 
 ### Test Guidelines
 
-- Test behavior, not implementation
-- One assertion per test when possible
-- Clear test names describing scenario
-- Use existing test utilities/helpers
-- Tests should be deterministic
+- Test behavior, not implementation details.
+- Prefer clear scenario-based test names.
+- Keep tests deterministic.
+- Use existing test utilities/helpers.
 
-## Important Reminders
+## Meta Management
 
-**NEVER**:
+- `planFirst`: maintain `tasks/todo.md` with checkable steps.
+- `verifyPlanner`: perform explicit verification before completion.
+- `trackProgress`: mark steps done as you go.
+- `explainChanges`: provide concise high-level summaries at key milestones.
+- `captureLessons`: after corrections, add/update lessons in `ai/rules.md`.
 
-- Use `--no-verify` to bypass commit hooks
-- Disable tests instead of fixing them
-- Commit code that doesn't compile
-- Make assumptions - verify with existing code
+## Self-Improvement Loop
 
-**ALWAYS**:
-
-- Commit working code incrementally
-- Update implementation plan status as you progress through stages
-- Learn from existing implementations
-- Stop after 2 failed attempts and use `bug-root-cause-analyzer` agent
-- Use the `code-reviewer` agent to review code before committing
-
-## Self-Improvement
-
-After Claude makes a mistake and you correct it, end with:
-
-> "Update your CLAUDE.md so you don't make that mistake again"
-
-Claude is good at writing rules for itself. Ruthlessly edit over time until the mistake rate drops.
-
-## Advanced Prompting Patterns
-
-### Challenge Claude
-
-- "Grill me on these changes and don't make a PR until I pass your test"
-- "Prove to me this works" (have Claude diff behavior between main and feature branch)
-
-### Iterate on Solutions
-
-- After a mediocre fix: "Knowing everything you know now, scrap this and implement the elegant solution"
-
-### Use More Compute
-
-- Append "use subagents" to any request where you want Claude to work harder
+- When corrected, extract the failure pattern and add a preventative rule.
+- Review relevant lessons at session start.
+- Ruthlessly refine rules to reduce repeated mistakes.
+- Suggested prompts:
+  - "Update your CLAUDE.md so you don't make that mistake again."
+  - "Prove to me this works." (diff behavior between main and feature branch)
+  - "Knowing everything you know now, scrap this and implement the elegant solution."
+  - "Use subagents." (when more parallel analysis is needed)
 
 ## Project-specific Workflow
 
@@ -279,7 +182,6 @@ When working on other repositories, use the following workflow:
 4. Socket IP (last resort only for local development)
 
 **Common Libraries:**
-- Rust: `tower_governor::key_extractor::SmartIpKeyExtractor`
 - Look for similar "smart" IP extractors in other languages
 
 #### Common Pitfalls to Avoid
@@ -479,31 +381,7 @@ Before implementing functionality that operates on a type:
 
 - Before commiting, always run a code formatter when available:
   - If there's a bin/fmt script, run it.
-  - In a Rust codebase, run `cargo fmt`, `cargo clippy`, and `cargo shear` to check for issues.
   - Otherwise, run the formatter for the language.
-
-### Rust-Specific Guidelines
-
-#### Dependency Management
-- **Golden Rule**: If `cargo shear` wants to remove a dependency, either use it properly or remove it
-- **Red Flag**: Any `cargo shear` ignore should trigger investigation - unused deps indicate design problems
-- **Cargo Features**: Verify Cargo features actually enable code that exists and is used
-- **Before adding ignores**: Always investigate why the dependency appears unused and ensure it's actually needed
-
-#### Serialization/Deserialization
-
-- **Before writing any parsing/serialization code**: Read the struct definition and check its derives
-- **If a struct has `#[derive(Deserialize)]`**: Use `serde_json::from_value()`, `from_str()`, etc. - never manually extract fields
-- **If a struct has `#[derive(Serialize)]`**: Use `serde_json::to_value()`, `to_string()`, etc.
-- **Red flag**: If you're writing >10 lines to convert JSON to a struct, stop and check the derives
-
-#### Quality Checklist for Rust
-
-1. Run `cargo fmt` - fix any formatting issues
-2. Run `cargo clippy --all-targets --all-features -- -D warnings` - fix all warnings
-3. **Run `cargo shear` - investigate any warnings before adding ignores**
-4. **Verify new Cargo features enable real functionality**
-5. **Check that new dependencies are actually imported/used in code**
 
 - When writing human friendly messages, don't use three dots (...) for an ellipsis, use an actual ellipsis (…).
 
