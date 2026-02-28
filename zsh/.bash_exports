@@ -17,6 +17,7 @@ export PATH="$HOME/.dotfiles/bin:$PATH"
 
 # Starship prompt
 eval "$(starship init zsh)"
+_STARSHIP_PROMPT_TEMPLATE="$PROMPT"
 
 # Node env
 eval "$(fnm env)"
@@ -26,6 +27,18 @@ export PATH="$HOME/go/bin:$PATH"
 
 # Direnv
 eval "$(direnv hook zsh)"
+
+# Flox profile scripts in some environments (e.g. posthog) do `export PS1=...`,
+# which direnv propagates back to the current shell and overwrites starship's prompt.
+# This hook detects the exported state and restores the original starship template.
+_restore_starship_prompt() {
+  if [[ "${parameters[PROMPT]}" == *export* ]] || [[ "${parameters[PS1]}" == *export* ]]; then
+    PROMPT="$_STARSHIP_PROMPT_TEMPLATE"
+    typeset +x PROMPT 2>/dev/null
+    typeset +x PS1 2>/dev/null
+  fi
+}
+add-zsh-hook precmd _restore_starship_prompt
 
 # Fzf
 source <(fzf --zsh 2>/dev/null)
