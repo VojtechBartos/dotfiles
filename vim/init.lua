@@ -151,6 +151,20 @@ vim.keymap.set("n", "<leader>da", function() vim.diagnostic.setqflist() vim.cmd(
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
 
+-- LSP keymaps (buffer-local, only active when an LSP client is attached)
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local map = function(keys, fn, desc)
+      vim.keymap.set("n", keys, fn, { buffer = args.buf, desc = desc })
+    end
+    map("gd",         vim.lsp.buf.definition,  "Go to definition")
+    map("gr",         vim.lsp.buf.references,   "Go to references")
+    map("K",          vim.lsp.buf.hover,        "Hover docs")
+    map("<leader>rn", vim.lsp.buf.rename,       "Rename symbol")
+    map("<leader>ca", vim.lsp.buf.code_action,  "Code action")
+  end,
+})
+
 -- Splits and save
 vim.keymap.set("n", "<leader>vv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>vh", "<cmd>split<cr>", { desc = "Split horizontally" })
