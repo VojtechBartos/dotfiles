@@ -1,6 +1,24 @@
 # Prevent timeout when Node/fnm or other tools are slow (e.g. first run, Docker context)
 command_timeout = 5000
 
+[nodejs]
+format = "[$symbol$version]($style) "
+version_format = "v${major}"
+
+[python]
+format = "[$symbol$version]($style) "
+version_format = "v${major}.${minor}"
+
+[docker_context]
+disabled = true
+
+[custom.docker_context_filtered]
+description = "Show docker context except OrbStack"
+when = "command -v docker >/dev/null 2>&1"
+command = "ctx=$(docker context show 2>/dev/null || true); [ -n \"$ctx\" ] && [ \"$ctx\" != \"orbstack\" ] && printf '%s' \"$ctx\""
+format = "[$output]($style) "
+style = "blue bold"
+
 [env_var.FLOX_PROMPT_ENVIRONMENTS]
 variable = "FLOX_PROMPT_ENVIRONMENTS"
 format = "flox [$env_value]($style) "
