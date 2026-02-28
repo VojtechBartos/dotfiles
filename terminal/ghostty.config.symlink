@@ -2,7 +2,7 @@
 # Symlinked to ~/Library/Application Support/com.mitchellh.ghostty/config on macOS
 
 #theme = Oceanic Next
-theme = Atom One Dark
+theme = /Users/vojta/.dotfiles/terminal/ghostty-themes/vscode-onedark
 macos-titlebar-style = tabs
 unfocused-split-opacity = 0.6
 
@@ -21,8 +21,8 @@ mouse-hide-while-typing = true
 scrollback-limit = 100000000
 
 
-background-opacity = 0.95
-background-blur=16
+#background-opacity = 0.95
+#background-blur=16
 
 font-thicken-strength=1
 adjust-cell-height=1

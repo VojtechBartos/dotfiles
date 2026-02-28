@@ -137,10 +137,12 @@ require("neo-tree").setup({
       hide_dotfiles = false,
       hide_gitignored = false,
     },
+    use_libuv_file_watcher = true,
   },
 })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neo-tree toggle" })
 vim.keymap.set("n", "<leader>ef", ":Neotree reveal<CR>", { silent = true })
+vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Git blame" })
 
 -- Diagnostics
 vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float({ scope = "line" }) end, { desc = "Show diagnostics" })
@@ -160,8 +162,9 @@ vim.keymap.set("n", "<leader>c", "<cmd>tabnew<cr>", { desc = "New tab" })
 
 
 local function set_indent_highlights()
-  vim.api.nvim_set_hl(0, "IBLChar",      { fg = "#3b414d" })
-  vim.api.nvim_set_hl(0, "IblScope",     { fg = "#5a6070" })
+  vim.api.nvim_set_hl(0, "IBLChar",            { fg = "#2f343d" })
+  vim.api.nvim_set_hl(0, "IblScope",            { fg = "#5a6070" })
+  vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { link = "WinSeparator" })
 end
 set_indent_highlights()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_indent_highlights })

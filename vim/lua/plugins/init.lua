@@ -5,11 +5,25 @@ return {
     priority = 1000,
     config = function()
       require("onedark").setup({
-        style = "warmer",
+        style = "dark",
         transparent = true,
+        colors = {
+          bg0    = "#282C34",  -- editor background (exact VS Code match)
+          bg1    = "#31353F",  -- lighter background (popups, floats)
+          fg     = "#ABB2BF",
+          red    = "#E06C75",
+          orange = "#D19A66",
+          yellow = "#E5C07B",
+          green  = "#98C379",
+          cyan   = "#56B6C2",
+          blue   = "#61AFEF",
+          purple = "#C678DD",
+          grey   = "#5C6370",
+        },
         highlights = {
-          ["Whitespace"]   = { fg = "#5a6275" },
-          ["@whitespace"]  = { fg = "#5a6275" },
+          ["@tag"]         = { fg = "#E5C07B" },  -- JSX/TSX tag names → yellow (VS Code match)
+          ["Whitespace"]   = { fg = "#3c4050" },  -- space dots (listchars) — much more subtle
+          ["@whitespace"]  = { fg = "#3c4050" },
         },
       })
       require("onedark").load()
