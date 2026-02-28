@@ -57,7 +57,7 @@ set -g mouse on
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 set -g @scroll-without-changing-pane on
 set -g @emulate-scroll-for-no-mouse-alternate-buffer on
-bind -n MouseDown1Pane select-pane -t= \; send-keys -M
+bind -n MouseDown1Pane select-pane -t= \; if-shell -F "#{mouse_any_flag}" "send-keys -M"
 
 #
 # Copy and paste
