@@ -24,6 +24,42 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 
+local uv = vim.uv or vim.loop
+
+local function find_nearest_python_venv(start_dir)
+  local dir = start_dir and vim.fs.normalize(start_dir) or uv.cwd()
+  local candidates = { ".venv", "venv", "uv", "flox", ".flox", "flox/venv", ".flox/venv" }
+
+  while dir and dir ~= "" do
+    for _, name in ipairs(candidates) do
+      local python = dir .. "/" .. name .. "/bin/python"
+      if uv.fs_stat(python) then
+        return {
+          root = dir,
+          name = name,
+          python = python,
+        }
+      end
+    end
+    local parent = vim.fs.dirname(dir)
+    if not parent or parent == dir then
+      break
+    end
+    dir = parent
+  end
+  return nil
+end
+
+function _G.lightline_python_venv()
+  local bufpath = vim.api.nvim_buf_get_name(0)
+  local dir = (bufpath ~= "" and vim.fs.dirname(bufpath)) or uv.cwd()
+  local venv = find_nearest_python_venv(dir)
+  if not venv then
+    return ""
+  end
+  return "[" .. venv.name .. "]"
+end
+
 -- Python LSP (pyright) + autocomplete (nvim-cmp) — Neovim 0.11 vim.lsp.config API
 local cmp = require("cmp")
 local cmp_lsp = require("cmp_nvim_lsp")
@@ -47,14 +83,12 @@ vim.lsp.config("pyright", {
   },
   on_attach = function(client, bufnr)
     local bufpath = vim.api.nvim_buf_get_name(bufnr)
-    local dir = vim.fs.dirname(bufpath)
-    local venv_dir = vim.fs.find(".venv", { path = dir, upward = true, type = "directory" })[1]
-    if venv_dir then
-      local python = venv_dir .. "/bin/python"
-      if vim.uv.fs_stat(python) then
-        client.config.settings.python.pythonPath = python
-        client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-      end
+    local dir = (bufpath ~= "" and vim.fs.dirname(bufpath)) or uv.cwd()
+    local venv = find_nearest_python_venv(dir)
+    if venv then
+      client.config.settings.python.pythonPath = venv.python
+      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+      vim.env.VIRTUAL_ENV = venv.root .. "/" .. venv.name
     end
   end,
 })
