@@ -84,6 +84,8 @@ set-option -qg window-status-last-style "fg=colour239"
 set-window-option -qg window-status-style "fg=colour239"
 set-window-option -qg window-status-activity-style "fg=colour11"
 set-window-option -qg window-status-bell-style "fg=colour1"
+set -g pane-border-style "fg=colour238"
+set -g pane-active-border-style "fg=colour31"
 
 
 
