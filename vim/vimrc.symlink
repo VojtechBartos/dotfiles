@@ -65,6 +65,10 @@ hi GitGutterDelete guifg=#ff2222 guibg=None ctermfg=1 ctermbg=None
 let g:auto_save = 0  " enable AutoSave on Vim startup
 
 " Lightline
+function! LightlinePythonVenv() abort
+  return v:lua.lightline_python_venv()
+endfunction
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -72,6 +76,7 @@ let g:lightline = {
       \             [ 'gitbranch', 'relativepath', 'modified' ] ],
       \   'right': [['lineinfo'],
       \             ['percent'],
+      \             ['pythonvenv'],
       \             ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
       \ },
       \ 'inactive': {
@@ -81,6 +86,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
+      \   'pythonvenv': 'LightlinePythonVenv',
       \ },
       \ }
 
