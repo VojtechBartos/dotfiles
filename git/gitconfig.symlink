@@ -60,6 +60,9 @@
 	branchprefix = vojtab/
 	signingkey = /Users/vojta/.ssh/id_ed25519_signing.pub
 
+[includeIf "gitdir:~/Code/github.com/posthog/"]
+	path = ~/.gitconfig.posthog
+
 [commit]
 	gpgsign = true
 [gpg]
