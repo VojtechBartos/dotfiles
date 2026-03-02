@@ -76,13 +76,37 @@ vim.keymap.set("n", "<leader>pv", function()
   end
 end, { desc = "Show Python venv path" })
 
+vim.keymap.set("n", "<leader>ps", function()
+  local bufpath = vim.api.nvim_buf_get_name(0)
+  local dir = (bufpath ~= "" and vim.fs.dirname(bufpath)) or uv.cwd()
+  local venv = find_nearest_python_venv(dir)
+  local default = vim.env.VIRTUAL_ENV or (venv and (venv.root .. "/" .. venv.name)) or ""
+
+  vim.ui.input({ prompt = "Python venv: ", default = default }, function(input)
+    if not input or input == "" then return end
+    input = vim.fn.expand(input)
+    local python = input .. "/bin/python"
+    if not uv.fs_stat(python) then
+      vim.notify("No python found at " .. python, vim.log.levels.ERROR)
+      return
+    end
+    vim.env.VIRTUAL_ENV = input
+    for _, client in ipairs(vim.lsp.get_clients({ name = "pyright" })) do
+      client.config.settings.python.pythonPath = python
+      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+    end
+    vim.notify("Python venv → " .. input, vim.log.levels.INFO)
+  end)
+end, { desc = "Set Python venv path" })
+
 -- Python LSP (pyright) + autocomplete (nvim-cmp) — Neovim 0.11 vim.lsp.config API
 local cmp = require("cmp")
 local cmp_lsp = require("cmp_nvim_lsp")
 
 local lsp_capabilities = cmp_lsp.default_capabilities()
 
--- Python
+-- Python (disabled — re-enable and tune when pyright noise is sorted)
+--[[
 vim.lsp.config("pyright", {
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
@@ -91,24 +115,26 @@ vim.lsp.config("pyright", {
   settings = {
     python = {
       analysis = {
-        diagnosticMode = "workspace",
+        diagnosticMode = "openFilesOnly",
+        typeCheckingMode = "basic",
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
       },
     },
   },
-  on_attach = function(client, bufnr)
-    local bufpath = vim.api.nvim_buf_get_name(bufnr)
-    local dir = (bufpath ~= "" and vim.fs.dirname(bufpath)) or uv.cwd()
-    local venv = find_nearest_python_venv(dir)
+  -- Set pythonPath before the server starts its first analysis pass, avoiding
+  -- a race condition where pyright would analyze with system Python.
+  before_init = function(params, config)
+    local root = params.rootUri and vim.uri_to_fname(params.rootUri) or uv.cwd()
+    local venv = find_nearest_python_venv(root)
     if venv then
-      client.config.settings.python.pythonPath = venv.python
-      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+      config.settings.python.pythonPath = venv.python
       vim.env.VIRTUAL_ENV = venv.root .. "/" .. venv.name
     end
   end,
 })
 vim.lsp.enable("pyright")
+--]]
 
 -- Go
 vim.lsp.config("gopls", {
