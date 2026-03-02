@@ -60,6 +60,22 @@ function _G.lightline_python_venv()
   return "[" .. venv.name .. "]"
 end
 
+vim.keymap.set("n", "<leader>pv", function()
+  local path = vim.env.VIRTUAL_ENV
+  if path and path ~= "" then
+    vim.notify(path, vim.log.levels.INFO)
+    return
+  end
+  local bufpath = vim.api.nvim_buf_get_name(0)
+  local dir = (bufpath ~= "" and vim.fs.dirname(bufpath)) or uv.cwd()
+  local venv = find_nearest_python_venv(dir)
+  if venv then
+    vim.notify(venv.root .. "/" .. venv.name, vim.log.levels.INFO)
+  else
+    vim.notify("No Python venv found", vim.log.levels.WARN)
+  end
+end, { desc = "Show Python venv path" })
+
 -- Python LSP (pyright) + autocomplete (nvim-cmp) — Neovim 0.11 vim.lsp.config API
 local cmp = require("cmp")
 local cmp_lsp = require("cmp_nvim_lsp")
