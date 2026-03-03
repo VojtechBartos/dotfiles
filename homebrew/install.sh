@@ -53,6 +53,7 @@ install bartender yes
 install brave-browser yes
 install caffeine yes
 install claude-code yes
+install withgraphite/tap/graphite
 install claude yes
 install cmake
 install codex yes
@@ -108,6 +109,7 @@ install uv
 install visual-studio-code yes
 install whatsapp yes
 install wget
+install opencode
 install xz
 install zlib
 install zsh
