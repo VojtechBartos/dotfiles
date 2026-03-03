@@ -38,3 +38,27 @@ alias ssh-keychain="ssh-add -K ~/.ssh/id_ed25519 && ssh-add -K ~/.ssh/id_ed25519
 # Generics
 alias la='ls -laG'
 alias n='nvim'
+alias opsign='eval $(op signin)'
+
+# PostHog
+alias hstart='op run --env-file=.env.local -- hogli start'
+
+# Graphite
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gp="git push"
+alias gl="git pull"
+alias gco="git checkout"
+alias gb="git branch"
+alias glog="git log --oneline --graph --d$"
+alias gd="git diff"
+alias gundo="git reset HEAD~1"
+alias create="gt create -m"
+alias restack="gt restack"
+alias sync="gt sync"
+alias modify="gt modify -m"
+alias up="gt up"
+alias down="gt down"
+alias track="gt track"
+alias submit="gt submit"
