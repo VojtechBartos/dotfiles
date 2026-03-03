@@ -105,8 +105,7 @@ local cmp_lsp = require("cmp_nvim_lsp")
 
 local lsp_capabilities = cmp_lsp.default_capabilities()
 
--- Python (disabled — re-enable and tune when pyright noise is sorted)
---[[
+-- Python
 vim.lsp.config("pyright", {
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
@@ -134,7 +133,6 @@ vim.lsp.config("pyright", {
   end,
 })
 vim.lsp.enable("pyright")
---]]
 
 -- Go
 vim.lsp.config("gopls", {
@@ -184,6 +182,16 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
     if vim.fn.getcmdwintype() == "" then
       vim.cmd("checktime")
     end
+  end,
+})
+
+-- Restart LSP clients when a file is reloaded due to an external change
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  callback = function(args)
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf })) do
+      vim.lsp.stop_client(client.id)
+    end
+    vim.defer_fn(function() vim.cmd("edit") end, 100)
   end,
 })
 
@@ -240,6 +248,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("<leader>ca", vim.lsp.buf.code_action,  "Code action")
   end,
 })
+
+-- LSP restart (useful after rebuilding dependencies)
+vim.keymap.set("n", "<leader>lr", function()
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    vim.lsp.stop_client(client.id)
+  end
+  vim.defer_fn(function() vim.cmd("edit") end, 100)
+end, { desc = "Restart LSP" })
 
 -- Splits and save
 vim.keymap.set("n", "<leader>vv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
