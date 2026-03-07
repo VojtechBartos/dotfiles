@@ -4,13 +4,14 @@
 #theme = Oceanic Next
 theme = /Users/vojta/.dotfiles/terminal/ghostty-themes/vscode-onedark
 macos-titlebar-style = tabs
-unfocused-split-opacity = 0.6
+unfocused-split-opacity = 0.8
 
 # Optional: explicit cursor so it's visible
 cursor-style = "bar"
 cursor-style-blink = true
 
 copy-on-select = clipboard
+clipboard-paste-protection = false
 focus-follows-mouse = true
 font-thicken = true
 
