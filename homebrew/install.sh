@@ -57,6 +57,7 @@ install withgraphite/tap/graphite
 install claude yes
 install cmake
 install codex yes
+install codex-app yes
 install cowsay
 install cursor yes
 install dropbox yes
@@ -111,6 +112,7 @@ install whatsapp yes
 install wget
 install opencode
 install xz
+install zed yes
 install zlib
 install zsh
 install zsh-autosuggestions
