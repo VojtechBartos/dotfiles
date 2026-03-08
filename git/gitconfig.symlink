@@ -57,15 +57,18 @@
 [user]
 	name = Vojta Bartos
 	email = hi@vojtabartos.com
-	branchprefix = vojtab/
-	signingkey = /Users/vojta/.ssh/id_ed25519_signing.pub
+	branchprefix = vojta/
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMmxCbNxbL3lb6ieaECwjSz4wVM/biba8ZJ244MCEMik
 
 [includeIf "gitdir:~/Code/github.com/posthog/"]
 	path = ~/.gitconfig.posthog
 
-[commit]
-	gpgsign = true
-[gpg]
-	format = ssh
 [gpg "ssh"]
-	allowedSignersFile = /Users/vojta/.gitconfig.allowed_signers
+    program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+    allowedSignersFile = /Users/vojta/.gitconfig.allowed_signers
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
+[alias]
+    sign-unpushed = "\\!f() { DEFAULT=$(git default); UPSTREAM=${1-origin/$DEFAULT}; git rebase --exec \"git commit --amend --no-edit -S\" $UPSTREAM; }; f"

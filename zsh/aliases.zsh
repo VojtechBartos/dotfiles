@@ -32,16 +32,13 @@ alias disk-cleanup-rust-aggressive='~/.dotfiles/bin/disk-cleanup --module rust -
 alias disk-cleanup-caches='~/.dotfiles/bin/disk-cleanup --module python'
 alias disk-monitor-log='tail -f ~/.dotfiles/.notes/disk-monitor.log'
 
-# SSH 
-alias ssh-keychain="ssh-add -K ~/.ssh/id_ed25519 && ssh-add -K ~/.ssh/id_ed25519_signing"
-
 # Generics
 alias la='ls -laG'
 alias n='nvim'
 alias opsign='eval $(op signin)'
 
 # PostHog
-alias hstart='op run --env-file=.env.local -- hogli start'
+alias hstart='op run --env-file=$HOME/Code/github.com/posthog/.env.posthog -- hogli start'
 
 # Graphite
 alias gs="git status"
