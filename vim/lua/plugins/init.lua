@@ -10,7 +10,7 @@ return {
         colors = {
           bg0    = "#282C34",  -- editor background (exact VS Code match)
           bg1    = "#31353F",  -- lighter background (popups, floats)
-          fg     = "#ABB2BF",
+          fg     = "#D4D8E0",
           red    = "#E06C75",
           orange = "#D19A66",
           yellow = "#E5C07B",
