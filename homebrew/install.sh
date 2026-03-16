@@ -111,6 +111,7 @@ install visual-studio-code yes
 install whatsapp yes
 install wget
 install opencode
+install obsidian yes
 install xz
 install zed yes
 install zlib
