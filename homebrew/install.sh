@@ -82,7 +82,7 @@ install httpie
 install istat-menus
 install jq
 install lazygit
-install lazygit
+install lazydocker
 install markdownlint-cli2
 install mergiraf
 install neovim
@@ -124,6 +124,13 @@ git lfs install
 
 # Bontree (check out if hombrew is in place to replace installs
 go install github.com/almonk/bontree@latest
+
+
+# Install Rust
+if test ! $(which rustup)
+then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
 # Ruby 3.1.3 via ruby-install (uses Homebrew openssl; openssl@1.1 is deprecated)
 # export PATH="/opt/homebrew/opt/openssl/bin:$PATH"
