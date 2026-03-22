@@ -102,6 +102,7 @@ PERMISSIONS_CONFIG=$(cat <<'EOF'
       "Bash(xargs:*)",
       "Bash(pbcopy:*)",
       "Bash(echo:*)",
+      "Bash(grep:*)",
       "Bash(xattr:*)",
       "Bash(brew info:*)",
       "Bash([ -f :*)",
