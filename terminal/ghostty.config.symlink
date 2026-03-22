@@ -5,6 +5,7 @@
 theme = /Users/vojta/.dotfiles/terminal/ghostty-themes/vscode-onedark
 macos-titlebar-style = tabs
 unfocused-split-opacity = 0.8
+split-divider-color = #61afef
 
 # Optional: explicit cursor so it's visible
 cursor-style = "bar"
