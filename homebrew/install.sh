@@ -56,6 +56,7 @@ install claude-code yes
 install withgraphite/tap/graphite
 install claude yes
 install cmake
+install cmux yes
 install codex yes
 install codex-app yes
 install cowsay
