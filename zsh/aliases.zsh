@@ -38,7 +38,7 @@ alias n='nvim'
 alias opsign='eval $(op signin)'
 
 # PostHog
-alias hstart='op run --env-file=$HOME/Code/github.com/posthog/.env.posthog -- hogli start --mprocs'
+alias hstart='op run --env-file=$HOME/Code/github.com/posthog/.env.posthog -- ./bin/hogli start --mprocs'
 
 # Graphite
 alias gs="git status"
