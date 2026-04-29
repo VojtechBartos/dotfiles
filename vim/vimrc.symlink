@@ -30,6 +30,7 @@ set ignorecase
 set smartcase
 set number
 set encoding=utf-8
+set nowrap
 set mouse=a " enable mouse for all modes
 set clipboard=unnamedplus
 set laststatus=2 " always display the statusline in all windows
