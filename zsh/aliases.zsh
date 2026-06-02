@@ -37,6 +37,10 @@ alias la='ls -laG'
 alias n='nvim'
 alias opsign='eval $(op signin)'
 
+# Claude Code
+# YOLO mode: skip all permission prompts. You only live once.
+alias yolo='claude --dangerously-skip-permissions'
+
 # PostHog
 alias hstart='op run --env-file=$HOME/Code/github.com/posthog/.env.posthog -- ./bin/hogli start --mprocs'
 
